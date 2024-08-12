@@ -2,6 +2,7 @@ import createElement from '../../assets/lib/create-element.js';
 
 export default class Modal {
   constructor() {
+<<<<<<< HEAD
     this.body = document.querySelector('body');
     this.modal = createElement(`
       <div class="modal">
@@ -61,3 +62,7 @@ export default class Modal {
     document.addEventListener('keydown', closeModalFunc);
   }
 }
+=======
+  }
+}
+>>>>>>> ba651802ce9a79077281a00590e2393bf9b2edef

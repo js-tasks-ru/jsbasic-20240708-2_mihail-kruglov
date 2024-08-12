@@ -3,6 +3,7 @@ import createElement from '../../assets/lib/create-element.js';
 export default class RibbonMenu {
   constructor(categories) {
     this.categories = categories;
+<<<<<<< HEAD
     this.elem = createElement(
       `<div class="ribbon">
         <div class="ribbon__arrow ribbon__arrow_left ribbon__arrow_visible">
@@ -94,3 +95,7 @@ export default class RibbonMenu {
     });
   }
 }
+=======
+  }
+}
+>>>>>>> ba651802ce9a79077281a00590e2393bf9b2edef
