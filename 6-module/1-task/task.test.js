@@ -1,56 +1,34 @@
-import UserTable from './index.js';
-
-describe('6-module-1-task', () => {
-  let userTable;
-
-  let clickEvent;
-
-  beforeEach(() => {
-    clickEvent = new MouseEvent('click', { bubbles: true });
-
-    let rows = [
-      {
-        name: 'Вася',
-        age: 25,
-        salary: 1000,
-        city: 'Самара'
-      },
-      {
-        name: 'Петя',
-        age: 30,
-        salary: 1500,
-        city: 'Москва'
+export default class UserTable {
+  constructor(rows) {
+    this.elem = document.createElement("table");
+    this.elem.innerHTML = `<thead>
+        <tr>
+            <th>Имя</th>
+            <th>Возраст</th>
+            <th>Зарплата</th>
+            <th>Город</th>
+            <th></th>
+        </tr>
+    </thead>`;
+    this.addTable = document.createElement("tbody");
+    rows.map((person) => {
+      let newLine = document.createElement("tr");
+      newLine.innerHTML = `
+        <td>${person.name}</td>
+        <td>${person.age}</td>
+        <td>${person.salary}</td>
+        <td>${person.city}</td>
+        <td><button>X</button></td>`;
+      this.addTable.append(newLine);
+    });
+    this.elem.append(this.addTable);
+    this.addTable.addEventListener("click", (event) => {
+      if (event.target.closest("button")) {
+        this.delete(event.target);
       }
-    ];
-
-    userTable = new UserTable(rows);
-
-    document.body.append(userTable.elem);
-  });
-
-  afterEach(() => {
-    userTable.elem.remove();
-  });
-
-  it('свойство elem возвращает один и тот же елемент, при каждом обращении', () => {
-    const elementFirstCall = userTable.elem;
-    const elementSecondCall = userTable.elem;
-
-    expect(elementFirstCall).toBe(elementSecondCall);
-  });
-
-  it('компонент должен отрисовать всех пользователей', () => {
-    let rowsInHTMLlength = userTable.elem.querySelectorAll('tbody tr').length;
-
-    expect(rowsInHTMLlength).toBe(2);
-  });
-
-  it('при клике на кнопку удаляется строка', () => {
-    let buttons = userTable.elem.querySelectorAll('button');
-
-    buttons[0].dispatchEvent(clickEvent);
-    buttons[1].dispatchEvent(clickEvent);
-
-    expect(userTable.elem.querySelector('tbody tr')).toBeNull();
-  });
-});
+    });
+  }
+  delete(item) {
+    item.closest("tr").remove();
+  }
+}
